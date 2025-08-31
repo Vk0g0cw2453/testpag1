@@ -1,0 +1,860 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Galería S9 | MDF, Glass & 3D</title>
+  <meta name="description" content="Portafolio de cortes y grabados en MDF y acrílico con efecto glass y 3D.">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root{
+      --bg: #0e1016;
+      --bg2: #0a0c12;
+      --text: #e9f1ff;
+      --muted: #a7b3c9;
+      --primary: #00e5ff;
+      --accent: #ff6ad5;
+      --stroke: rgba(255,255,255,0.16);
+      --shadow: 0 10px 30px rgba(0,0,0,0.35);
+      --radius: 16px;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0; color:var(--text);
+      font-family:Poppins,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+      background:
+        radial-gradient(1200px 700px at 10% -10%, rgba(0,229,255,.18), transparent 60%),
+        radial-gradient(900px 600px at 90% 110%, rgba(255,106,213,.14), transparent 60%),
+        linear-gradient(160deg, var(--bg2), var(--bg));
+      display:flex; flex-direction:column;
+    }
+    .wrap{max-width:1200px; margin:0 auto; padding:16px 22px;}
+
+    header.sticky{
+      position:sticky; top:0; z-index:20;
+      border-bottom:1px solid var(--stroke);
+      background: linear-gradient( to right, rgba(14,16,22,.7), rgba(14,16,22,.3) );
+      backdrop-filter: blur(10px) saturate(130%);
+    }
+    .nav{display:flex; align-items:center; justify-content:space-between; gap:16px;}
+    .brand{display:flex; align-items:center; gap:10px; font-weight:700;}
+    .brand .dot{width:12px; height:12px; border-radius:50%;
+      background: radial-gradient(circle at 30% 30%, var(--primary), #6ffaff);
+      box-shadow:0 0 14px rgba(0,229,255,.55);
+    }
+    .btn{
+      appearance:none; border:none; cursor:pointer;
+      padding:10px 14px; border-radius:12px; color:var(--text);
+      background: linear-gradient(135deg, rgba(0,229,255,.2), rgba(255,106,213,.18));
+      border:1px solid var(--stroke);
+      transition: transform .15s ease, box-shadow .2s ease;
+    }
+    .btn:hover{ transform: translateY(-1px); box-shadow: 0 8px 20px rgba(0,0,0,.25);}
+    .btn.primary{
+      background: linear-gradient(135deg, var(--primary), #35f1ff);
+      color:#05131a; font-weight:700;
+      box-shadow: 0 8px 24px rgba(0,229,255,.35);
+    }
+
+    .controls{
+      display:grid; gap:12px; margin-top:14px;
+      grid-template-columns: 1fr auto;
+    }
+    @media (max-width:800px){ .controls{ grid-template-columns: 1fr; } }
+    .search{
+      display:flex; align-items:center; gap:10px;
+      border:1px solid var(--stroke); border-radius:999px;
+      background: rgba(255,255,255,.06); padding:10px 14px;
+      backdrop-filter: blur(8px);
+    }
+    .search input{
+      flex:1; background:transparent; border:none; outline:none;
+      color:var(--text); font-size:14px;
+    }
+    .toggle{
+      border-radius:999px; padding:10px 14px; font-weight:600;
+      border:1px solid var(--stroke); background: rgba(255,255,255,.06);
+      cursor:pointer; transition: all .2s ease;
+    }
+    .toggle.active{
+      background: linear-gradient(135deg, rgba(16,185,129,.25), rgba(45,212,191,.22));
+      border-color: rgba(45,212,191,.5); color:#073a2e;
+    }
+
+    nav.filters{ margin-top:14px; }
+    .filter-list{ display:flex; flex-wrap:wrap; gap:10px }
+    .filter-btn{
+      padding:8px 12px; border-radius:999px; cursor:pointer; font-size:14px;
+      border:1px solid var(--stroke); background:rgba(255,255,255,.06); color:#d7e7ff;
+      transition: all .2s ease;
+    }
+    .filter-btn:hover{ transform: translateY(-1px) }
+    .filter-btn.active{ background: linear-gradient(135deg, rgba(0,229,255,.25), rgba(255,106,213,.22)); color:#07141a; font-weight:700; }
+
+    .summary{
+      display:flex; align-items:center; justify-content:space-between;
+      color:var(--muted); font-size:14px; margin:16px 0 8px; gap:12px; flex-wrap:wrap;
+    }
+
+    /* 📱 3 columnas SIEMPRE (incluye móvil). Si querés 1-2-3 según ancho, te dejo un comentario más abajo. */
+    .gallery{
+      margin:16px 0 36px;
+      display:grid; gap:10px;
+      grid-template-columns: repeat(3, minmax(0,1fr));
+    }
+
+    .card{
+      position:relative; overflow:hidden;
+      border-radius: var(--radius);
+      background: linear-gradient( to bottom right, rgba(255,255,255,.08), rgba(255,255,255,.03));
+      border:1px solid var(--stroke);
+      box-shadow: var(--shadow);
+      transform-style: preserve-3d; will-change: transform, box-shadow;
+      transition: transform .25s ease, box-shadow .25s ease;
+      cursor: pointer;
+      display:flex; flex-direction:column; gap:10px; padding:12px;
+    }
+    .top{
+      display:flex; align-items:flex-start; justify-content:space-between; gap:10px;
+    }
+    .badge{ font-size:10px; letter-spacing:.4px; text-transform:uppercase; color:#d3e6ff; opacity:.9 }
+    .title{ margin:2px 0 0; font-size:clamp(14px, 2.6vw, 18px); font-weight:700; line-height:1.2 }
+    .fav-btn{
+      border:1px solid var(--stroke); background:rgba(255,255,255,.06); color:var(--text);
+      border-radius:999px; padding:6px 10px; font-size:14px; cursor:pointer; transition: all .2s ease; flex-shrink:0;
+    }
+    .fav-btn.active{ border-color: rgba(244,63,94,.5); background: rgba(244,63,94,.18); color:#ffd7df }
+
+    .media{
+      height: clamp(110px, 28vw, 220px); /* 📏 Aproximado al ancho de columna (3 col) */
+      border-radius:12px; overflow:hidden; position:relative;
+      border:1px solid var(--stroke); display:grid; place-items:center;
+      background: rgba(255,255,255,.04);
+    }
+    .media img{
+      width:100%; height:100%; object-fit:cover; display:block;
+      filter: saturate(1.05) contrast(1.02);
+      transition: transform .35s ease, filter .35s ease;
+      pointer-events:none;
+    }
+    .card:hover .media img{ transform: scale(1.05); filter: saturate(1.12) contrast(1.05) }
+    .desc{ color:var(--muted); font-size:12px; margin:0 }
+    .chips{ display:flex; flex-wrap:wrap; gap:6px; }
+    .chip{
+      padding:5px 8px; border-radius:999px; border:1px solid var(--stroke);
+      background: rgba(255,255,255,.06); font-size:11px; color:#d7e7ff;
+    }
+    .cta-row{ display:flex; justify-content:flex-end }
+    .view-btn{
+      appearance:none; border:none; border-radius:999px; cursor:pointer; font-weight:700;
+      background: linear-gradient(135deg, #6366f1, #60a5fa);
+      color:white; padding:8px 12px; box-shadow: 0 8px 24px rgba(99,102,241,.35);
+      font-size:12px;
+    }
+    .glare{
+      position:absolute; inset:-40%; pointer-events:none; border-radius:inherit;
+      background: radial-gradient( circle at var(--mx,50%) var(--my,50%), rgba(255,255,255,.25), transparent 35%);
+      mix-blend-mode: screen; opacity:.25; transition: opacity .3s ease;
+    }
+    .card:hover .glare{ opacity:.45 }
+
+    .empty{
+      border:1px dashed var(--stroke); background: rgba(255,255,255,.05);
+      border-radius: var(--radius); padding:28px; text-align:center; color:var(--muted);
+    }
+
+    /* Modal detalles */
+    .modal[hidden]{ display:none }
+    .modal{
+      position:fixed; inset:0; z-index:40;
+      background: rgba(3,5,10,.82);
+      display:grid; place-items:center; padding:20px;
+      backdrop-filter: blur(6px);
+    }
+    .modal .frame{
+      width:min(1000px, 92vw); max-height:88vh;
+      background: linear-gradient( to bottom right, rgba(255,255,255,.09), rgba(255,255,255,.03));
+      border:1px solid var(--stroke); border-radius: 16px; overflow:hidden;
+      box-shadow: 0 30px 80px rgba(0,0,0,.5);
+      display:grid; grid-template-rows: auto auto 1fr auto;
+    }
+    .modal .topbar{
+      display:flex; align-items:center; justify-content:space-between; padding:10px 12px;
+    }
+    .modal .close{
+      background: rgba(255,255,255,.12); border:1px solid var(--stroke);
+      border-radius:10px; color:var(--text); font-size:18px; width:36px; height:36px;
+      display:grid; place-items:center; cursor:pointer;
+    }
+    .modal .hero{
+      position:relative; display:block; overflow:hidden;
+      border-top:1px solid var(--stroke); border-bottom:1px solid var(--stroke);
+      margin:0 10px; border-radius:14px; padding:10px;
+    }
+
+    /* Carrusel dentro del modal */
+    .gradient{ position:absolute; inset:0; pointer-events:none; opacity:.5 }
+    .carousel{ width:100%; display:grid; gap:10px; position:relative; z-index:1 }
+    .carousel-viewport{
+      position:relative; overflow:hidden; border-radius:12px; border:1px solid var(--stroke);
+      background: rgba(0,0,0,.2); height:clamp(220px, 48vh, 420px);
+      touch-action: pan-y; user-select: none;
+    }
+    .carousel-track{ display:flex; height:100%; transform: translateX(0); transition: transform .35s ease; }
+    .slide{ min-width:100%; height:100%; display:grid; place-items:center; }
+    .slide img{ width:100%; height:100%; object-fit:contain; background: radial-gradient(circle at 50% 50%, rgba(255,255,255,.06), transparent 70%); }
+
+    .carousel-arrow{
+      position:absolute; top:50%; transform:translateY(-50%);
+      z-index:2; width:38px; height:38px; border-radius:999px;
+      border:1px solid var(--stroke); background: rgba(0,0,0,.35); color:white;
+      display:grid; place-items:center; cursor:pointer;
+    }
+    .carousel-arrow:hover{ background: rgba(0,0,0,.5); }
+    .carousel-arrow.left{ left:10px; }
+    .carousel-arrow.right{ right:10px; }
+
+    .carousel-thumbs{ display:flex; gap:8px; overflow-x:auto; padding-bottom:4px; }
+    .carousel-thumbs::-webkit-scrollbar{ height:6px; }
+    .carousel-thumbs::-webkit-scrollbar-thumb{ background: rgba(255,255,255,0.15); border-radius:999px; }
+    .thumb{
+      width:56px; height:56px; border-radius:10px; overflow:hidden; flex:0 0 auto;
+      border:1px solid var(--stroke); background: rgba(255,255,255,.04); cursor:pointer;
+      opacity:.85; transition: transform .2s ease, opacity .2s ease, border-color .2s ease;
+    }
+    .thumb img{ width:100%; height:100%; object-fit:cover; }
+    .thumb.active{ outline:2px solid #60a5fa; opacity:1; transform: translateY(-2px); }
+    .carousel-viewport.touching .carousel-track{ transition:none !important; }
+
+    .modal .body{ padding:16px 18px; display:grid; gap:12px }
+    .modal .grid{ display:grid; grid-template-columns: 1fr; gap:10px }
+    @media (min-width:700px){ .modal .grid{ grid-template-columns: 1fr 1fr; } }
+    .modal .pill{ font-size:12px; opacity:.9; text-transform:uppercase; color:#d3e6ff; }
+    .modal .feat{
+      border:1px solid var(--stroke); background: rgba(255,255,255,.06); border-radius:12px;
+      padding:10px 12px; font-size:14px; color:#d7e7ff;
+    }
+    .modal .actions{
+      display:flex; align-items:center; justify-content:space-between; gap:12px;
+      padding:12px 16px; border-top:1px solid var(--stroke);
+      background: linear-gradient( to bottom right, rgba(8,15,24,.72), rgba(10,12,18,.6) );
+    }
+    .modal .demo{ border-radius:999px; padding:10px 14px; font-weight:700;
+      background: linear-gradient(135deg, #10b981, #34d399); color:#042a22;
+      border:1px solid rgba(16,185,129,.55);
+    }
+
+    footer{
+      border-top:1px solid var(--stroke);
+      background: linear-gradient( to right, rgba(14,16,22,.7), rgba(14,16,22,.3) );
+      backdrop-filter: blur(8px);
+    }
+    footer .wrap{ display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap; }
+
+    .wa{
+      position:fixed; right:18px; bottom:18px; z-index:50;
+      background:#25D366; color:white; border:none; border-radius:999px;
+      padding:12px 16px; font-weight:700; box-shadow: 0 12px 28px rgba(37,211,102,.4);
+      cursor:pointer;
+    }
+    .wa small{ opacity:.9; font-weight:600 }
+
+    @media (prefers-reduced-motion: reduce){
+      .card, .card img, .btn, .filter-btn, .toggle, .carousel-track{ transition:none !important }
+    }
+
+    /* 💡 Si más adelante querés 1-2-3 columnas: 
+      .gallery{ grid-template-columns: 1fr; }
+      @media (min-width:520px){ .gallery{ grid-template-columns: repeat(2,1fr); } }
+      @media (min-width:920px){ .gallery{ grid-template-columns: repeat(3,1fr); } }
+    */
+  </style>
+</head>
+<body>
+  <header class="sticky">
+    <div class="wrap nav">
+      <div class="brand">
+        <span class="dot"></span>
+        <span><!-- 🏷️ Cambia el nombre de tu marca aquí -->Tu Marca | Cortes & Grabados</span>
+      </div>
+      <div style="display:flex; gap:10px">
+        <a class="btn" href="#galeria">Ver galería</a>
+        <!-- 📞 Cambia el teléfono de WhatsApp aquí -->
+        <a class="btn primary" href="https://wa.me/5491112345678" target="_blank" rel="noopener">Pedir presupuesto</a>
+      </div>
+    </div>
+    <div class="wrap">
+      <div class="controls">
+        <div class="search" role="search">
+          <span aria-hidden="true">🔍</span>
+          <input id="search" type="search" placeholder="Buscar piezas, materiales o características..." aria-label="Buscar en la galería">
+        </div>
+        <button id="toggleFavs" class="toggle" aria-pressed="false">Mostrar solo favoritos</button>
+      </div>
+      <nav class="filters" aria-label="Categorías">
+        <ul id="filterList" class="filter-list"></ul>
+      </nav>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section class="summary" aria-live="polite">
+      <span id="resultCount">0 resultados</span>
+      <span id="favCount">0 favoritos guardados</span>
+    </section>
+
+    <section id="galeria" class="gallery" aria-label="Colección de trabajos"></section>
+
+    <div id="emptyState" class="empty wrap" hidden>
+      <p class="title" style="font-size:18px; margin:0 0 6px">No hay resultados</p>
+      <p>Probá otra búsqueda o cambiá la categoría.</p>
+    </div>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <div>© <span id="yr"></span> Tu Marca. Hecho con S9.</div>
+      <div style="opacity:.8"><!-- 📸 Cambia tus redes acá -->Instagram: @tuusuario · WhatsApp: +54 9 11 1234-5678</div>
+    </div>
+  </footer>
+
+  <!-- 📞 Cambia este WhatsApp también si querés -->
+  <a class="wa" href="https://wa.me/5491112345678" target="_blank" rel="noopener">WhatsApp <small>pedí tu cotización</small></a>
+
+  <!-- Modal Detalles -->
+  <div class="modal" id="modal" hidden>
+    <div class="frame">
+      <div class="topbar">
+        <div style="padding:6px 10px; border-radius:10px; border:1px solid var(--stroke); background: rgba(255,255,255,.06);">Detalles</div>
+        <button class="close" aria-label="Cerrar" id="modalClose">×</button>
+      </div>
+      <div class="hero">
+        <!-- 🎠 El carrusel se inyecta aquí por JS -->
+      </div>
+      <div class="body">
+        <div style="display:flex; align-items:flex-start; justify-content:space-between; gap:12px; flex-wrap:wrap">
+          <div>
+            <div id="modalCat" class="pill"></div>
+            <h2 id="modalTitle" style="margin:4px 0 0; font-size:26px">Título</h2>
+          </div>
+          <button id="modalFav" class="fav-btn" type="button" aria-pressed="false">♡</button>
+        </div>
+        <p id="modalDesc" class="desc"></p>
+        <div>
+          <h3 class="pill" style="letter-spacing:.4px">Puntos clave</h3>
+          <div id="modalFeats" class="grid"></div>
+        </div>
+      </div>
+      <div class="actions">
+        <div class="desc">¿Querés una demo o presupuesto? Hablemos.</div>
+        <a class="demo" href="https://wa.me/5491112345678" target="_blank" rel="noopener">Reservar demo</a>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // 🗓️ Año dinámico en footer
+    document.getElementById('yr').textContent = new Date().getFullYear();
+
+    // 🏷️ Categorías (podés agregar/quitar)
+    const categories = ["Todas", "MDF", "Cristal", "3D", "Señalética", "Detalle"];
+
+    // 🖼️ Datos de la galería
+    // 👉 Reemplazá las imágenes por las tuyas dentro de assets/ (o usa URLs absolutas).
+    const galleryItems = [
+      {
+        id: "mandala-mdf",
+        title: "Mandala en capas",
+        category: "MDF",
+        description: "MDF 3 mm x 4 capas, armado en relieve y acabado natural.",
+        gradient: "linear-gradient(to bottom right, #6366f1, #a855f7, #ec4899)",
+        features: ["Corte fino", "Capas 3D", "MDF 3 mm"],
+        images: [
+          { src: "assets/mandala-mdf.jpg", alt: "Mandala MDF capa frontal" },
+          { src: "assets/mandala-mdf-2.webp", alt: "Detalle de capas MDF" },
+          { src: "assets/mandala-mdf-3.jpg", alt: "Mandala MDF armado" }
+        ]
+      },
+      {
+        id: "senaletica-corp",
+        title: "Señalética corporativa",
+        category: "Señalética",
+        description: "MDF 6 mm laqueado con tipografías limpias.",
+        gradient: "linear-gradient(to bottom right, #38bdf8, #22d3ee, #10b981)",
+        features: ["MDF 6 mm", "Laqueado PU", "Montaje pared"],
+        images: [
+          { src: "assets/senaletica.jpg", alt: "Señalética MDF frente" },
+          { src: "assets/senaletica-2.webp", alt: "Señalética MDF detalle" }
+        ]
+      },
+      {
+        id: "topper-glass",
+        title: "Topper efecto cristal",
+        category: "Cristal",
+        description: "Acrílico transparente 3 mm con bordes pulidos.",
+        gradient: "linear-gradient(to bottom right, #f59e0b, #f97316, #fb7185)",
+        features: ["Acrílico 3 mm", "Acabado glass", "Personalizable"],
+        images: [
+          { src: "assets/topper-cristal.jpg", alt: "Topper cristal vista 1" },
+          { src: "assets/topper-cristal-2.jpg", alt: "Topper cristal vista 2" }
+        ]
+      },
+      {
+        id: "caja-encastre",
+        title: "Caja de encastre",
+        category: "MDF",
+        description: "Caja con tapa corredera, tolerancias ajustadas.",
+        gradient: "linear-gradient(to bottom right, #22c55e, #14b8a6, #06b6d4)",
+        features: ["Encastres", "Prototipos", "Serie corta"],
+        images: [
+          { src: "assets/caja-encastre.jpg", alt: "Caja de encastre vista" },
+          { src: "assets/caja-encastre-2.jpg", alt: "Detalle tapa corredera" }
+        ]
+      },
+      {
+        id: "letras-corporeas",
+        title: "Letras corpóreas",
+        category: "Señalética",
+        description: "MDF 9 mm con laqueado espejo.",
+        gradient: "linear-gradient(to bottom right, #60a5fa, #22d3ee, #34d399)",
+        features: ["MDF 9 mm", "Laqueado", "Plantilla montaje"],
+        images: [
+          { src: "assets/letras-corporeas.jpg", alt: "Letras corpóreas frente" },
+          { src: "assets/letras-corporeas-2.jpg", alt: "Letras corpóreas detalle" }
+        ]
+      },
+      {
+        id: "lampara-3d",
+        title: "Lámpara 3D",
+        category: "3D",
+        description: "Acrílico cristal grabado + base LED.",
+        gradient: "linear-gradient(to bottom right, #a855f7, #6366f1, #3b82f6)",
+        features: ["Acrílico", "Grabado fino", "Base LED"],
+        images: [
+          { src: "assets/lampara-3d.jpg", alt: "Lámpara 3D encendida" },
+          { src: "assets/lampara-3d-2.jpg", alt: "Lámpara 3D detalle del grabado" }
+        ]
+      },
+      {
+        id: "reloj-pared",
+        title: "Reloj de pared calado",
+        category: "MDF",
+        description: "Calado delicado en MDF 3 mm, mecanismo silencioso.",
+        gradient: "linear-gradient(to bottom right, #ec4899, #f43f5e, #f59e0b)",
+        features: ["MDF 3 mm", "Calado", "Listo para colgar"],
+        images: [
+          { src: "assets/reloj-mdf.jpg", alt: "Reloj MDF calado" },
+          { src: "assets/reloj-mdf-2.jpg", alt: "Detalle calado" }
+        ]
+      },
+      {
+        id: "placa-puerta",
+        title: "Placa de puerta",
+        category: "Detalle",
+        description: "MDF 6 mm con grabado fino y acabado satinado.",
+        gradient: "linear-gradient(to bottom right, #06b6d4, #60a5fa, #a78bfa)",
+        features: ["Grabado", "Acabado satinado", "MDF 6 mm"],
+        images: [
+          { src: "assets/placa-puerta.jpg", alt: "Placa de puerta frente" },
+          { src: "assets/placa-puerta-2.jpg", alt: "Placa de puerta detalle" }
+        ]
+      },
+      {
+        id: "trofeo-glass",
+        title: "Trofeo glass look",
+        category: "Cristal",
+        description: "Acrílico cristal con base MDF a medida.",
+        gradient: "linear-gradient(to bottom right, #10b981, #34d399, #86efac)",
+        features: ["Acrílico", "Base MDF", "Personalización"],
+        images: [
+          { src: "assets/trofeo-glass.jpg", alt: "Trofeo glass look frente" },
+          { src: "assets/trofeo-glass-2.jpg", alt: "Trofeo glass look detalle" }
+        ]
+      }
+    ];
+
+    // 🧠 Estado
+    const state = {
+      selectedCategory: "Todas",
+      searchTerm: "",
+      showFavorites: false,
+      favorites: new Set(JSON.parse(localStorage.getItem('gallery_favorites') || '[]'))
+    };
+
+    // 🔗 Elementos UI
+    const filterList = document.getElementById('filterList');
+    const galleryEl = document.getElementById('galeria');
+    const emptyEl = document.getElementById('emptyState');
+    const resultCountEl = document.getElementById('resultCount');
+    const favCountEl = document.getElementById('favCount');
+    const searchInput = document.getElementById('search');
+    const toggleFavsBtn = document.getElementById('toggleFavs');
+    const modal = document.getElementById('modal');
+    const modalClose = document.getElementById('modalClose');
+    const modalTitle = document.getElementById('modalTitle');
+    const modalDesc = document.getElementById('modalDesc');
+    const modalCat = document.getElementById('modalCat');
+    const modalFav = document.getElementById('modalFav');
+
+    // 🏷️ Render de filtros
+    function renderFilters(){
+      filterList.innerHTML = categories.map(cat=>{
+        const active = cat === state.selectedCategory ? 'active' : '';
+        return `<li><button type="button" class="filter-btn ${active}" data-cat="${cat}">${cat}</button></li>`;
+      }).join('');
+    }
+
+    // 🔎 Filtrado y búsqueda
+    function getVisibleItems(){
+      let items = [...galleryItems];
+      if(state.selectedCategory !== 'Todas'){
+        items = items.filter(i => i.category === state.selectedCategory);
+      }
+      if(state.showFavorites){
+        items = items.filter(i => state.favorites.has(i.id));
+      }
+      if(state.searchTerm.trim()){
+        const q = state.searchTerm.toLowerCase().trim();
+        items = items.filter(i =>
+          i.title.toLowerCase().includes(q) ||
+          i.description.toLowerCase().includes(q) ||
+          (i.features||[]).some(f => f.toLowerCase().includes(q)) ||
+          (i.category||'').toLowerCase().includes(q)
+        );
+      }
+      return items;
+    }
+
+    // 🖼️ Render de la galería (cards)
+    function renderGallery(){
+      const items = getVisibleItems();
+      resultCountEl.textContent = `${items.length} ${items.length===1 ? 'resultado' : 'resultados'}`;
+      favCountEl.textContent = `${state.favorites.size} ${state.favorites.size===1 ? 'favorito' : 'favoritos'} guardados`;
+
+      if(items.length === 0){
+        galleryEl.innerHTML = '';
+        emptyEl.hidden = false;
+        return;
+      }
+      emptyEl.hidden = true;
+
+      galleryEl.innerHTML = items.map(item=>{
+        const isFav = state.favorites.has(item.id);
+        const firstImg = item.images?.[0]?.src || '';
+        return `
+          <article class="card" data-id="${item.id}" role="article" aria-label="${item.title}">
+            <div class="top">
+              <div>
+                <div class="badge">${item.category}</div>
+                <h3 class="title">${item.title}</h3>
+              </div>
+              <button type="button" class="fav-btn ${isFav ? 'active' : ''}" data-fav="${item.id}" aria-pressed="${isFav}" aria-label="${isFav ? 'Eliminar de favoritos' : 'Añadir a favoritos'}">${isFav?'❤':'♡'}</button>
+            </div>
+            <div class="media">
+              <div class="gradient" style="background:${item.gradient}"></div>
+              ${firstImg ? `<img src="${firstImg}" alt="${item.title}" loading="lazy">` : ''}
+            </div>
+            <p class="desc">${item.description}</p>
+            <div class="chips">
+              ${(item.features||[]).map(f=>`<span class="chip">${f}</span>`).join('')}
+            </div>
+            <div class="cta-row">
+              <button type="button" class="view-btn" data-open="${item.id}">Ver detalles →</button>
+            </div>
+            <div class="glare" aria-hidden="true"></div>
+          </article>
+        `;
+      }).join('');
+
+      attachCardTilt(); // 🎛️ Tilt + glare
+    }
+
+    // 🎛️ Tilt + glare en las cards
+    function attachCardTilt(){
+      const cards = [...document.querySelectorAll('.card')];
+      const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if(!reduceMotion){
+        cards.forEach(card=>{
+          card.addEventListener('pointermove', (e)=>{
+            const r = card.getBoundingClientRect();
+            const x = e.clientX - r.left, y = e.clientY - r.top;
+            const px = (x / r.width) - 0.5;
+            const py = (y / r.height) - 0.5;
+            const rx = (-py * 8).toFixed(2);
+            const ry = (px * 8).toFixed(2);
+            card.style.transform = `perspective(1000px) rotateX(${rx}deg) rotateY(${ry}deg) translateY(-2px)`;
+            const glare = card.querySelector('.glare');
+            if(glare){
+              glare.style.setProperty('--mx', `${(x/r.width)*100}%`);
+              glare.style.setProperty('--my', `${(y/r.height)*100}%`);
+            }
+          });
+          card.addEventListener('pointerleave', ()=>{ card.style.transform = ''; });
+        });
+      }
+    }
+
+    // ❤️ Favoritos
+    function toggleFavorite(id){
+      if(state.favorites.has(id)){
+        state.favorites.delete(id);
+      }else{
+        state.favorites.add(id);
+      }
+      localStorage.setItem('gallery_favorites', JSON.stringify([...state.favorites]));
+      renderGallery();
+      if(currentItem && currentItem.id === id){
+        const isFav = state.favorites.has(id);
+        modalFav.classList.toggle('active', isFav);
+        modalFav.setAttribute('aria-pressed', String(isFav));
+        modalFav.textContent = isFav ? '❤' : '♡';
+      }
+    }
+
+    // 🧩 Delegación de eventos sobre la galería (una sola vez)
+    function onGalleryClick(e){
+      const favBtn = e.target.closest('[data-fav]');
+      const openBtn = e.target.closest('[data-open]');
+      const card = e.target.closest('.card');
+
+      if(favBtn){
+        e.stopPropagation();
+        const id = favBtn.getAttribute('data-fav');
+        toggleFavorite(id);
+        return;
+      }
+      if(openBtn){
+        const id = openBtn.getAttribute('data-open');
+        openDetails(id);
+        return;
+      }
+      if(card){
+        openDetails(card.getAttribute('data-id'));
+      }
+    }
+    galleryEl.addEventListener('click', onGalleryClick);
+
+    // 🔎 Búsqueda
+    searchInput.addEventListener('input', ()=>{
+      state.searchTerm = searchInput.value || '';
+      renderGallery();
+    });
+
+    // 🌟 Toggle favoritos
+    toggleFavsBtn.addEventListener('click', ()=>{
+      state.showFavorites = !state.showFavorites;
+      toggleFavsBtn.classList.toggle('active', state.showFavorites);
+      toggleFavsBtn.setAttribute('aria-pressed', String(state.showFavorites));
+      toggleFavsBtn.textContent = state.showFavorites ? 'Mostrando favoritos' : 'Mostrar solo favoritos';
+      renderGallery();
+    });
+
+    // 🗂️ Click en filtros
+    filterList.addEventListener('click', (e)=>{
+      const btn = e.target.closest('.filter-btn');
+      if(!btn) return;
+      state.selectedCategory = btn.getAttribute('data-cat');
+      [...filterList.querySelectorAll('.filter-btn')].forEach(b=>b.classList.toggle('active', b===btn));
+      renderGallery();
+      document.getElementById('galeria')?.scrollIntoView({behavior:'smooth', block:'start'});
+    });
+
+    // 🔍 Modal + Carrusel
+    let currentItem = null;
+
+    function buildCarousel(item){
+      const hero = modal.querySelector('.hero');
+      hero.innerHTML = ''; // 🧽 Limpia contenido previo
+
+      const images = (item.images && item.images.length) ? item.images : [];
+
+      // 🌈 Fondo degradado
+      const grad = document.createElement('div');
+      grad.className = 'gradient';
+      grad.style.background = item.gradient || 'linear-gradient(135deg, rgba(255,255,255,.06), rgba(255,255,255,.02))';
+      hero.appendChild(grad);
+
+      // 🎠 Estructura del carrusel
+      const carousel = document.createElement('div');
+      carousel.className = 'carousel';
+
+      const viewport = document.createElement('div');
+      viewport.className = 'carousel-viewport';
+      const track = document.createElement('div');
+      track.className = 'carousel-track';
+
+      track.innerHTML = images.map(img => `
+        <div class="slide"><img src="${img.src}" alt="${img.alt || item.title}" loading="lazy"></div>
+      `).join('');
+
+      const prev = document.createElement('button');
+      prev.className = 'carousel-arrow left';
+      prev.setAttribute('aria-label','Anterior');
+      prev.innerHTML = '‹';
+
+      const next = document.createElement('button');
+      next.className = 'carousel-arrow right';
+      next.setAttribute('aria-label','Siguiente');
+      next.innerHTML = '›';
+
+      viewport.appendChild(track);
+      viewport.appendChild(prev);
+      viewport.appendChild(next);
+
+      const thumbs = document.createElement('div');
+      thumbs.className = 'carousel-thumbs';
+      thumbs.innerHTML = images.map((img, i) => `
+        <button class="thumb ${i===0?'active':''}" data-idx="${i}" aria-label="Ver imagen ${i+1}">
+          <img src="${img.src}" alt="">
+        </button>
+      `).join('');
+
+      carousel.appendChild(viewport);
+      carousel.appendChild(thumbs);
+      hero.appendChild(carousel);
+
+      // 🧭 Estado del carrusel
+      let idx = 0;
+      let startX=0, touching=false, width=viewport.clientWidth;
+
+      function update(){
+        const translate = -idx * width;
+        track.style.transform = `translateX(${translate}px)`;
+        [...thumbs.children].forEach((t, i) => t.classList.toggle('active', i===idx));
+        prev.style.visibility = idx === 0 ? 'hidden' : 'visible';
+        next.style.visibility = idx === images.length - 1 ? 'hidden' : 'visible';
+      }
+      function setIndex(i){ idx = Math.max(0, Math.min(images.length-1, i)); update(); }
+      function nextSlide(){ setIndex(idx+1); }
+      function prevSlide(){ setIndex(idx-1); }
+      function recalc(){ width = viewport.clientWidth; update(); }
+
+      // 🖱️ Flechas
+      next.addEventListener('click', nextSlide);
+      prev.addEventListener('click', prevSlide);
+
+      // 🧩 Miniaturas
+      thumbs.addEventListener('click', (e)=>{
+        const btn = e.target.closest('.thumb'); if(!btn) return;
+        setIndex(parseInt(btn.dataset.idx,10));
+      });
+
+      // 👆 Arrastrar/Deslizar con Pointer Events (evita que "se pegue")
+      const onPointerDown = (e)=>{
+        touching = true;
+        viewport.classList.add('touching');
+        startX = e.clientX ?? 0;
+        track.style.transition = 'none';
+        if (e.pointerId !== undefined && viewport.setPointerCapture) {
+          viewport.setPointerCapture(e.pointerId);
+        }
+      };
+      const onPointerMove = (e)=>{
+        if(!touching) return;
+        const x = e.clientX ?? 0;
+        const delta = x - startX;
+        const base = -idx * width;
+        track.style.transform = `translateX(${base + delta}px)`;
+        e.preventDefault();
+      };
+      const onPointerUp = (e)=>{
+        if(!touching) return;
+        touching = false;
+        viewport.classList.remove('touching');
+        track.style.transition = '';
+        const upX = e.clientX ?? startX;
+        const delta = upX - startX;
+        const threshold = Math.max(40, width * 0.1);
+        if(delta > threshold) prevSlide();
+        else if(delta < -threshold) nextSlide();
+        else update();
+        if (e.pointerId !== undefined && viewport.releasePointerCapture) {
+          viewport.releasePointerCapture(e.pointerId);
+        }
+      };
+
+      viewport.addEventListener('pointerdown', onPointerDown);
+      viewport.addEventListener('pointermove', onPointerMove);
+      viewport.addEventListener('pointerup', onPointerUp);
+      viewport.addEventListener('pointercancel', onPointerUp);
+
+      // ⌨️ Teclado
+      const onKey = (e)=>{
+        if(modal.hidden) return;
+        if(e.key === 'ArrowRight') nextSlide();
+        if(e.key === 'ArrowLeft') prevSlide();
+      };
+      window.addEventListener('keydown', onKey);
+
+      // 📏 Resize
+      const onResize = ()=> recalc();
+      window.addEventListener('resize', onResize);
+
+      // 🧹 Limpieza al cerrar
+      modal.addEventListener('closeCarousel', ()=>{
+        window.removeEventListener('keydown', onKey);
+        window.removeEventListener('resize', onResize);
+        viewport.removeEventListener('pointerdown', onPointerDown);
+        viewport.removeEventListener('pointermove', onPointerMove);
+        viewport.removeEventListener('pointerup', onPointerUp);
+        viewport.removeEventListener('pointercancel', onPointerUp);
+      }, { once:true });
+
+      // 🚀 Inicio: calcular ancho cuando YA es visible
+      recalc();
+      requestAnimationFrame(recalc); // doble chequeo tras el pintado
+
+      // 🙈 Si hay una sola imagen, ocultamos controles
+      if(images.length <= 1){
+        next.style.display = 'none';
+        prev.style.display = 'none';
+        thumbs.style.display = 'none';
+      }
+    }
+
+    function openDetails(id){
+      const item = galleryItems.find(i=>i.id===id);
+      if(!item) return;
+      currentItem = item;
+
+      // Texto
+      modalTitle.textContent = item.title;
+      modalDesc.textContent = item.description || '';
+      modalCat.textContent = item.category || '';
+
+      // Mostrar primero para que calcule tamaños correctamente ✅
+      modal.hidden = false;
+      document.body.style.overflow = 'hidden';
+
+      // Construir carrusel visible
+      buildCarousel(item);
+
+      // ❤️ Estado botón favoritos en modal
+      const isFav = state.favorites.has(item.id);
+      modalFav.classList.toggle('active', isFav);
+      modalFav.setAttribute('aria-pressed', String(isFav));
+      modalFav.textContent = isFav ? '❤' : '♡';
+    }
+
+    function closeDetails(){
+      modal.hidden = true;
+      document.body.style.overflow = '';
+      modal.dispatchEvent(new Event('closeCarousel')); // limpiar listeners del carrusel
+      currentItem = null;
+    }
+
+    modalClose.addEventListener('click', closeDetails);
+    modal.addEventListener('click', (e)=>{ if(e.target === modal) closeDetails(); });
+    window.addEventListener('keydown', (e)=>{ if(!modal.hidden && (e.key==='Escape' || e.key==='Esc')) closeDetails(); });
+    modalFav.addEventListener('click', ()=>{
+      if(!currentItem) return;
+      toggleFavorite(currentItem.id);
+    });
+
+    // 🚀 Init
+    renderFilters();
+    renderGallery();
+  </script>
+</body>
+</html>
