@@ -1,0 +1,242 @@
+[
+    {
+        "audience": "driver",
+        "category": "Saludo",
+        "label": "Saludo S/N",
+        "text": "Buen día, gracias por contactarse al Soporte Técnico de InDrive, \nTe atiende David López,\n\nCon gusto atenderé tu solicitud."
+    },
+    {
+    "audience": "driver",
+    "category": "Perfil",
+    "label": "Cambio de Foto",
+    "text": "Para atender tu solicitud, por favor envía una fotografía con las siguientes características: \n \n•Foto tipo selfie no foto de la fotografía de identificación o tamaño infantil.\n•Foto sin acompañante.\n•Foto sin filtros de iluminación o belleza facial.\n•Foto a color.\n•Foto sin lentes oscuros.\n•Foto de rostro completo y sin ninguna mueca o seña.\n•Foto siempre con playera o camisa, no con camisetas o desnudos.\n\nEn un momento será habilitado en la parte inferior del chat la opción para adjuntar la imagen. \nQuedamos en espera de su información."
+    },
+    {
+      "audience": "driver",
+      "category": "No Show",
+      "label": "No show (5 min)",
+      "text": "Esperé 5 minutos en el punto acordado. Procederé a reportar no show en la app. ¡Gracias!"
+    },
+    {
+      "audience": "driver",
+      "category": "Seguridad",
+      "label": "Verificación",
+      "text": "Recuerda verificar el nombre del pasajero antes de iniciar y mantener siempre el cinturón abrochado."
+    },
+    {
+      "audience": "driver",
+      "category": "Llegada/Ubicación",
+      "label": "Llegué al punto",
+      "text": "Ya estoy en el punto de encuentro. Te espero 5 minutos. Si necesitas cambiar el punto, avísame por aquí."
+    },
+    {
+      "audience": "driver",
+      "category": "Llegada/Ubicación",
+      "label": "Referencia de ubicación",
+      "text": "¿Podrías compartir una referencia cercana (tienda, esquina, local)? Así te encuentro más rápido."
+    },
+    {
+      "audience": "driver",
+      "category": "Espera",
+      "label": "Tiempo de espera",
+      "text": "Llevo 5 minutos de espera. Después de 5 minutos, el viaje se cancela. Puedes contactar a Soporte para cualquier aclaración."
+    },
+    {
+      "audience": "driver",
+      "category": "Espera",
+      "label": "Comenzar el viaje",
+      "text": "El viaje puede comenzar solo si el pasajero está en el punto de partida. Así el cálculo de la tarifa es correcto."
+    },
+    {
+      "audience": "driver",
+      "category": "Ruta",
+      "label": "Ruta en el GPS",
+      "text": "Si quieres seguir una ruta diferente a la sugerida, puedes usar el GPS de tu app y trazar la mejor ruta."
+    },
+    {
+      "audience": "driver",
+      "category": "Ruta",
+      "label": "Cambios de ruta",
+      "text": "Si el pasajero pide cambiar la ruta, coméntalo antes de comenzar el viaje. No olvides usar el GPS para la mejor ruta."
+    },
+    {
+      "audience": "driver",
+      "category": "Duda",
+      "label": "Comisión",
+      "text": "La tarifa que ofreces al pasajero es sin comisión. Si el viaje no se realiza, no se cobra comisión."
+    },
+    {
+      "audience": "driver",
+      "category": "Duda",
+      "label": "Precio de viaje",
+      "text": "inDrive te permite negociar la tarifa. Si el precio sugerido es muy bajo, propón uno justo para ambos y ofrece el viaje de nuevo."
+    },
+    {
+      "audience": "driver",
+      "category": "Duda",
+      "label": "Tarifa",
+      "text": "La tarifa es sin comisión. El cobro mínimo lo puedes consultar en la app y el cobro sugerido es una guía para que ambos negocien el mejor precio."
+    },
+    {
+      "audience": "driver",
+      "category": "Duda",
+      "label": "Porcentaje de viajes",
+      "text": "inDrive no tiene porcentaje de aceptación. Puedes aceptar, rechazar o negociar la tarifa de todos los viajes que lleguen a tu app."
+    },
+    {
+      "audience": "driver",
+      "category": "Duda",
+      "label": "Límite de viajes",
+      "text": "No hay límite de viajes. Puedes hacer tantos viajes como desees. Puedes usar la app para recibir más."
+    },
+    {
+      "audience": "driver",
+      "category": "Soporte",
+      "label": "Reportar inconveniente",
+      "text": "Si has tenido algún problema con un pasajero, repórtalo en Soporte desde la app. Si necesitas ayuda, nuestro equipo te asistirá."
+    },
+    {
+      "audience": "driver",
+      "category": "Soporte",
+      "label": "Reportar pasajero",
+      "text": "Si el pasajero ha tenido un mal comportamiento, repórtalo en Soporte. ¡Tu seguridad es nuestra prioridad!"
+    },
+    {
+      "audience": "driver",
+      "category": "Soporte",
+      "label": "Revisar un cobro",
+      "text": "Si ves un cobro indebido, repórtalo en Soporte desde la app y adjunta la evidencia."
+    },
+    {
+      "audience": "driver",
+      "category": "Objetos",
+      "label": "Objetos perdidos",
+      "text": "Si olvidaste algo, escribe al pasajero por el chat. Si no responde, crea un ticket en Soporte."
+    },
+    {
+      "audience": "driver",
+      "category": "Niños",
+      "label": "Silla infantil",
+      "text": "Por seguridad, no se permite transportar menores sin sistema de retención infantil apropiado."
+    },
+    {
+      "audience": "driver",
+      "category": "General",
+      "label": "Estado de la app",
+      "text": "Para un mejor rendimiento de la app, actualiza la app de inDrive en tu tienda de aplicaciones y mantén tu GPS encendido."
+    },
+    {
+      "audience": "passenger",
+      "category": "Bienvenida",
+      "label": "Bienvenida",
+      "text": "¡Hola! Gracias por viajar con inDrive. Tu conductor va en camino, mantén la app abierta y el volumen activado."
+    },
+    {
+      "audience": "passenger",
+      "category": "No Show",
+      "label": "No show (5 min)",
+      "text": "Ya llegué al punto de encuentro. Te espero 5 minutos. Por favor, avísame si necesitas más tiempo o si ya vienes."
+    },
+    {
+      "audience": "passenger",
+      "category": "No Show",
+      "label": "Reportar no show",
+      "text": "He esperado 5 minutos en el punto de encuentro. Si no te veo, procederé a reportar no show. ¡Gracias!"
+    },
+    {
+      "audience": "passenger",
+      "category": "Ubicación",
+      "label": "Referencia de ubicación",
+      "text": "¿Podrías compartir una referencia cercana (tienda, esquina, local)? Así mi conductor me encontrará más rápido."
+    },
+    {
+      "audience": "passenger",
+      "category": "Ruta",
+      "label": "Compartir avance",
+      "text": "Para tu tranquilidad, puedes compartir tu viaje con un contacto. El GPS de la app te mostrará el avance."
+    },
+    {
+      "audience": "passenger",
+      "category": "Ruta",
+      "label": "Sugerir ruta",
+      "text": "Puedes proponer una ruta. Aclárala con el conductor antes de iniciar el viaje."
+    },
+    {
+      "audience": "passenger",
+      "category": "Seguridad",
+      "label": "Botón de seguridad",
+      "text": "Si notas algo inusual, usa el botón de seguridad en la app y repórtalo a Soporte."
+    },
+    {
+      "audience": "passenger",
+      "category": "Promociones",
+      "label": "Revisa promos",
+      "text": "Consulta la sección de promociones en la app para ver descuentos disponibles en tu zona."
+    },
+    {
+      "audience": "passenger",
+      "category": "Soporte",
+      "label": "Revisión de cobros",
+      "text": "Si ves un cobro indebido, repórtalo en Soporte desde la app y adjunta evidencia."
+    },
+    {
+      "audience": "passenger",
+      "category": "Objetos",
+      "label": "Olvidé un objeto",
+      "text": "Si olvidaste algo, escribe al conductor por el chat. Si no responde, crea un ticket en Soporte."
+    },
+    {
+      "audience": "passenger",
+      "category": "Paradas",
+      "label": "Paradas/Multi-destino",
+      "text": "Si necesitas paradas, agrégalas antes de iniciar para calcular correctamente el costo."
+    },
+    {
+      "audience": "passenger",
+      "category": "Espera",
+      "label": "Tiempo de espera",
+      "text": "El conductor te esperará 5 minutos en el punto de encuentro. Si no llegas en ese tiempo, se cancelará el viaje. Si necesitas cambiar el punto, avísale por el chat."
+    },
+    {
+      "audience": "passenger",
+      "category": "Espera",
+      "label": "Tiempo de llegada",
+      "text": "Si el conductor no llega en el tiempo que la app te indica, puedes enviarle un mensaje para pedir su ubicación. Si no responde, el viaje se cancela."
+    },
+    {
+      "audience": "passenger",
+      "category": "Duda",
+      "label": "Tarifa",
+      "text": "La tarifa es sin comisión. Si quieres mejorar el precio, puedes proponer uno nuevo y esperar la respuesta del conductor."
+    },
+    {
+      "audience": "passenger",
+      "category": "Duda",
+      "label": "Precio de viaje",
+      "text": "inDrive te permite negociar la tarifa. Si el precio sugerido es muy alto, propón uno más bajo. El conductor puede aceptar o rechazar."
+    },
+    {
+      "audience": "passenger",
+      "category": "Duda",
+      "label": "Forma de pago",
+      "text": "inDrive no cobra por el viaje. El conductor te indicará el método de pago que prefiera."
+    },
+    {
+      "audience": "passenger",
+      "category": "Duda",
+      "label": "Pago en efectivo",
+      "text": "El conductor es quien establece su forma de pago. Confirma el precio y la forma de pago antes de iniciar tu viaje."
+    },
+    {
+      "audience": "passenger",
+      "category": "General",
+      "label": "Estado de la app",
+      "text": "Para un mejor rendimiento de la app, actualiza la app de inDrive en tu tienda de aplicaciones y mantén tu GPS encendido."
+    },
+    {
+      "audience": "passenger",
+      "category": "General",
+      "label": "Calificación",
+      "text": "Al finalizar el viaje, califica a tu conductor. Tus comentarios nos ayudan a mejorar el servicio."
+    }
+]
